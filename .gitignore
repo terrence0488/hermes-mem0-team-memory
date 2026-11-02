@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.venv/
+# Real configs hold service keys. Only the example belongs in git.
+team_memory.json

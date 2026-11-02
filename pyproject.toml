@@ -1,0 +1,12 @@
+# The plugin uses the Python standard library only, so there is nothing to bound or to
+# install. Hermes treats an empty list as "no declaration" and leaves its environment alone.
+# Keep this file free of [build-system], optional dependencies and dependency groups: any of
+# them makes Hermes ask for dependency consent and prepare a new environment.
+[project]
+name = "hermes-mem0-team-memory"
+version = "0.1.0"
+description = "Shared, opt-in team memory plugin for Hermes Agent"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = []

@@ -1,0 +1,37 @@
+{
+  "qdrant": {
+    "url": "REPLACE_ME_QDRANT_URL",
+    "api_key": "REPLACE_ME_QDRANT_API_KEY",
+    "collection": "team_memory",
+    "timeout_seconds": 5
+  },
+  "embedding": {
+    "base_url": "REPLACE_ME_OPENAI_COMPATIBLE_V1_URL",
+    "api_key": "",
+    "model": "nomic-embed-text:v1.5",
+    "dimensions": 768,
+    "document_prefix": "search_document: ",
+    "query_prefix": "search_query: ",
+    "timeout_seconds": 10
+  },
+  "access": {
+    "allowed_platforms": ["telegram"],
+    "admins": ["telegram:REPLACE_ME_USER_ID"]
+  },
+  "sharing": {
+    "confirm_tool_share": true,
+    "max_chars": 2000,
+    "bot_name": ""
+  },
+  "search": {
+    "limit": 5,
+    "score_threshold": 0.0
+  },
+  "auto_recall": {
+    "enabled": false,
+    "limit": 3,
+    "score_threshold": 0.6,
+    "min_chars": 12,
+    "timeout_seconds": 3
+  }
+}

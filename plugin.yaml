@@ -1,0 +1,16 @@
+name: team_memory
+version: 0.1.0
+manifest_version: 2
+api_version: 1
+description: Shared, opt-in team memory for several users and bots, stored in Qdrant alongside each user's private memory provider.
+license: MIT
+homepage: https://github.com/terrence0488/hermes-mem0-team-memory
+requires_hermes: ">=0.22.5"
+tags: [memory, team, qdrant]
+provides_tools:
+  - team_share
+  - team_search
+  - team_delete
+provides_hooks:
+  - pre_tool_call
+  - pre_llm_call
