@@ -1,8 +1,10 @@
 """Prove the author path against real Hermes code. Skipped unless run inside a Hermes install.
 
-Run it with the Hermes interpreter, from this folder:
+Run it with the Hermes interpreter, from the Hermes checkout. Do not run it from the plugin folder:
+the plugin's top-level ``tools.py`` would shadow Hermes's ``tools`` package and the imports would fail.
 
-    TEAM_MEMORY_REAL_HERMES=1 <hermes-venv>/bin/python -m unittest discover -s tests -p 'test_hermes_integration.py'
+    cd <hermes-checkout>
+    TEAM_MEMORY_REAL_HERMES=1 <hermes-venv>/bin/python -m unittest discover -s <plugin-dir>/tests -p 'test_hermes_integration.py'
 
 It starts its own fake backends on loopback and a temporary config. It does not touch a real
 gateway, Qdrant, Telegram or the model. It covers the real session context, the real

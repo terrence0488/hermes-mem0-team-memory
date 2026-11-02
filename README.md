@@ -21,13 +21,18 @@ after every Hermes update.
 
 ## Status
 
+Results for commit `e577aab` on Hermes v0.22.5 (arm64):
+
 | Check | State |
 |---|---|
 | Unit tests with fake Hermes session and fake Qdrant/embedding servers | Pass |
-| Author path read through the Hermes v0.22.5 source | Done |
-| `tests/test_hermes_integration.py` against real Hermes code | **Not run yet** |
-| `hermes plugins validate` and `hermes plugins doctor` | **Not run yet** |
-| Real Qdrant, real embeddings, real gateway | **Not run yet** |
+| `hermes plugins validate` and `hermes plugins doctor` | Pass, with the expected private-import warning |
+| `tests/test_hermes_integration.py` against real Hermes code | 3 of 3 pass |
+| Real Qdrant 1.20.0 and Ollama embeddings (`nomic-embed-text:v1.5`), with session data simulated | Share, search, delete permissions, refused platform and the `/share` handler pass |
+| Real Telegram gateway, one user, reported by the operator | Approval prompt showing the exact text, author, `/share`, search and delete pass |
+| Second real user on a live gateway | **Not tested yet** |
+| Denying an approval, and letting one time out | **Not tested yet** |
+| The 250-character approval prompt check | **Not tested yet** |
 
 If the session data does not reach a tool handler, the tools refuse the call. They do not guess an
 author.
@@ -154,11 +159,12 @@ The first run of these checks is what proves the author path end to end.
    hermes plugins doctor <plugin-dir> --ci
    ```
 
-2. Run the integration test with the Hermes interpreter, from the plugin folder. It uses only temporary
-   files and fake servers on loopback.
+2. Run the integration test with the Hermes interpreter, from the Hermes checkout. Do not run it from the
+   plugin folder: the plugin's top-level `tools.py` would shadow Hermes's `tools` package and all three
+   tests would fail on import. The test uses only temporary files and fake servers on loopback.
 
    ```bash
-   TEAM_MEMORY_REAL_HERMES=1 <hermes-venv>/bin/python -m unittest discover -s tests -p 'test_hermes_integration.py'
+   cd <hermes-checkout> && TEAM_MEMORY_REAL_HERMES=1 <hermes-venv>/bin/python -m unittest discover -s <plugin-dir>/tests -p 'test_hermes_integration.py'
    ```
 
 3. From a chat, have user A ask the bot to share a test sentence. An approval prompt must show the exact
